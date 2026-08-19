@@ -1,0 +1,62 @@
+{
+  "global": [
+    {"pattern": "sole discretion", "severity": 3, "explanation": "Gives one party unchecked, unilateral power with no objective standard."},
+    {"pattern": "in perpetuity", "severity": 3, "explanation": "Obligation never expires \u2014 unusually harsh outside confidentiality clauses."},
+    {"pattern": "irrevocabl", "severity": 2, "explanation": "Cannot be undone or renegotiated later, even if circumstances change."},
+    {"pattern": "without notice", "severity": 2, "explanation": "Removes the other party's ability to prepare or react."},
+    {"pattern": "regardless of", "severity": 2, "explanation": "Signals the clause overrides normal fault/cause limitations."},
+    {"pattern": "any and all", "severity": 1, "explanation": "Overly broad language often used to maximize scope of obligation."},
+    {"pattern": "waive", "severity": 2, "explanation": "One party is giving up a legal right \u2014 check what right is being waived and why."},
+    {"pattern": "non-refundable", "severity": 2, "explanation": "Removes financial recourse even if the other party fails to perform."},
+    {"pattern": "unlimited", "severity": 3, "explanation": "No cap on exposure \u2014 a major deviation from standard risk allocation."},
+    {"pattern": "no obligation to", "severity": 2, "explanation": "Explicitly excuses a party from a duty a reasonable counterpart would expect."},
+    {"pattern": "for the rest of", "severity": 2, "explanation": "Lifetime obligation with no expiry \u2014 rarely enforceable and highly unusual."},
+    {"pattern": "at any time without", "severity": 2, "explanation": "Unilateral change of terms without counterparty protection."}
+  ],
+  "by_category": {
+    "Indemnification": [
+      {"pattern": "whether or not arising from", "severity": 3, "explanation": "Forces indemnification even for the indemnified party's own negligence \u2014 highly unusual and one-sided."},
+      {"pattern": "regardless of cause, fault", "severity": 3, "explanation": "Removes any fault requirement, turning indemnity into unconditional insurance."}
+    ],
+    "Limitation of Liability": [
+      {"pattern": "no limitation or cap of any kind", "severity": 3, "explanation": "One party has zero liability protection \u2014 highly asymmetric."},
+      {"pattern": "at company's discretion", "severity": 3, "explanation": "Liability protection isn't fixed in the contract \u2014 it can be revoked unilaterally."}
+    ],
+    "Termination": [
+      {"pattern": "deemed fully earned and non-refundable", "severity": 3, "explanation": "Client pays in full even if terminated early or for cause \u2014 unusually punitive."},
+      {"pattern": "may not terminate", "severity": 2, "explanation": "Locks one party into a long-term obligation with no exit."}
+    ],
+    "Confidentiality": [
+      {"pattern": "for the rest of employee's life", "severity": 3, "explanation": "Perpetual personal obligation surviving employment \u2014 often unenforceable and a red flag."},
+      {"pattern": "general industry knowledge", "severity": 2, "explanation": "Overreaches into ordinary professional knowledge, not just proprietary secrets."}
+    ],
+    "Payment Terms": [
+      {"pattern": "unilaterally increase fees", "severity": 3, "explanation": "Pricing can change without negotiation or consent."},
+      {"pattern": "non-refundable under any circumstances", "severity": 3, "explanation": "No refund even for total non-performance by the other party."}
+    ],
+    "Intellectual Property": [
+      {"pattern": "unrelated to this agreement", "severity": 3, "explanation": "IP assignment reaches beyond the scope of the actual engagement."},
+      {"pattern": "on contractor's own time using contractor's own equipment", "severity": 3, "explanation": "Claims ownership of work with no real connection to the engagement \u2014 legally aggressive."}
+    ],
+    "Non-Compete": [
+      {"pattern": "anywhere in the world", "severity": 3, "explanation": "Geographic scope is almost certainly unenforceable and disproportionate."},
+      {"pattern": "ten years", "severity": 2, "explanation": "Duration far exceeds typical enforceable non-compete windows."}
+    ],
+    "Dispute Resolution": [
+      {"pattern": "waives any right to a jury trial or class action", "severity": 2, "explanation": "Removes significant legal remedies available to the weaker party."}
+    ],
+    "Force Majeure": [
+      {"pattern": "no relief shall be granted", "severity": 3, "explanation": "One-sided force majeure that protects only one party."}
+    ],
+    "Warranty": [
+      {"pattern": "as is", "severity": 2, "explanation": "Disclaims all warranties \u2014 shifts quality risk entirely to the other party."},
+      {"pattern": "no warranties of any kind whatsoever", "severity": 2, "explanation": "Total warranty disclaimer, unusually broad even for software."}
+    ],
+    "Assignment": [
+      {"pattern": "freely assign", "severity": 2, "explanation": "Contract obligations could be transferred to an unknown third party without consent."}
+    ],
+    "Data Protection": [
+      {"pattern": "sell, and share any personal data", "severity": 3, "explanation": "Grants broad commercial rights over personal data with no restriction \u2014 likely non-compliant with data protection law."}
+    ]
+  }
+}

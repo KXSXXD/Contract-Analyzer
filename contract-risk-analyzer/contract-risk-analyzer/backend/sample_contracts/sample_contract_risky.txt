@@ -1,0 +1,45 @@
+MASTER SERVICES AGREEMENT
+
+This Master Services Agreement ("Agreement") is entered into between Company Inc. ("Company") and Client Corp. ("Client").
+
+1. Indemnification
+Client shall indemnify, defend, and hold harmless Company and its officers, directors, and employees from any and all claims, losses, damages, and expenses of any kind whatsoever, whether or not arising from Company's own negligence.
+
+2. Limitation of Liability
+There shall be no limitation or cap of any kind on Client's liability to Company under this Agreement, including for indirect and consequential damages. Company's liability shall be limited solely at Company's discretion, and Company reserves the right to disclaim all liability at any time without notice.
+
+3. Termination
+Company may terminate this Agreement immediately and without notice at its sole and absolute discretion for any reason or no reason whatsoever. Upon termination for any reason, all fees paid to date shall be deemed fully earned and non-refundable, and Client shall remain liable for the full remaining contract value.
+
+4. Confidentiality
+Employee agrees never to disclose any information learned during employment, including information that is general industry knowledge, for the rest of Employee's life.
+
+5. Payment Terms
+All fees are due immediately upon signing and are non-refundable under any circumstances, including if Company fails to deliver any services. Company reserves the right to unilaterally increase fees at any time during the term without prior notice to Client.
+
+6. Intellectual Property
+Contractor hereby assigns to Company all right, title, and interest in any and all inventions, works, and ideas Contractor has ever created, including those unrelated to this Agreement.
+
+7. Non-Compete
+Employee agrees not to engage in any business anywhere in the world that competes with Company in any way, for a period of ten years after termination.
+
+8. Force Majeure
+Client shall bear all risk of delay for any reason whatsoever, including events of force majeure affecting Company, and no relief shall be granted to Company under any circumstances.
+
+9. Warranty
+The Software is provided strictly 'as is' with no warranties of any kind whatsoever, express or implied, including no warranty of merchantability or fitness for a particular purpose.
+
+10. Assignment
+Company may freely assign this Agreement, in whole or in part, to any third party at any time without notice to or consent from Client.
+
+11. Data Protection
+Client grants Company an unrestricted right to use, sell, and share any personal data collected under this Agreement for any purpose, in perpetuity.
+
+12. Governing Law
+This Agreement shall be governed by and construed in accordance with the laws of the State of Delaware, without regard to its conflict of laws principles.
+
+13. Dispute Resolution
+All disputes must be brought exclusively in the courts located in Company's home jurisdiction, and Client irrevocably waives any right to a jury trial or class action.
+
+14. Entire Agreement
+This Agreement constitutes the entire agreement between the parties and supersedes all prior negotiations, representations, or agreements relating to its subject matter.
