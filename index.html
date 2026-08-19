@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Contract Risk Analyzer</title>
+    <style>
+      :root {
+        --bg: #0f1117;
+        --panel: #171a23;
+        --panel2: #1e2230;
+        --border: #2a2f3f;
+        --text: #e8eaf0;
+        --muted: #8b91a5;
+        --accent: #6c8dff;
+        --low: #3ecf8e;
+        --medium: #f5b942;
+        --high: #f0556b;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+      header {
+        padding: 28px 32px 16px;
+        border-bottom: 1px solid var(--border);
+      }
+      header h1 {
+        margin: 0 0 4px;
+        font-size: 22px;
+      }
+      header p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .layout {
+        display: flex;
+        gap: 24px;
+        padding: 24px 32px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .left {
+        flex: 0 0 340px;
+      }
+      .right {
+        flex: 1;
+        min-width: 0;
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 18px;
+        margin-bottom: 16px;
+      }
+      textarea {
+        width: 100%;
+        min-height: 160px;
+        background: var(--panel2);
+        color: var(--text);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 13px;
+        resize: vertical;
+        font-family: inherit;
+      }
+      input[type="file"] {
+        color: var(--muted);
+        font-size: 13px;
+        margin-top: 8px;
+      }
+      button {
+        background: var(--accent);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 18px;
+        font-size: 14px;
+        cursor: pointer;
+        font-weight: 600;
+        margin-top: 10px;
+      }
+      button:hover {
+        opacity: 0.9;
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .sample-btn {
+        background: var(--panel2);
+        color: var(--text);
+        border: 1px solid var(--border);
+        font-weight: 400;
+        font-size: 12px;
+        padding: 6px 10px;
+        margin-right: 6px;
+        margin-top: 0;
+      }
+      .score-ring {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: 8px auto;
+        font-weight: 700;
+        border: 8px solid var(--border);
+      }
+      .score-ring .num {
+        font-size: 34px;
+      }
+      .score-ring .lvl {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
+      .badge {
+        display: inline-block;
+        padding: 2px 9px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+      }
+      .Low {
+        background: rgba(62, 207, 142, 0.15);
+        color: var(--low);
+      }
+      .Medium {
+        background: rgba(245, 185, 66, 0.15);
+        color: var(--medium);
+      }
+      .High {
+        background: rgba(240, 85, 107, 0.15);
+        color: var(--high);
+      }
+      .clause {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--border);
+        border-radius: 8px;
+        padding: 14px 16px;
+        margin-bottom: 12px;
+      }
+      .clause.Low {
+        border-left-color: var(--low);
+      }
+      .clause.Medium {
+        border-left-color: var(--medium);
+      }
+      .clause.High {
+        border-left-color: var(--high);
+      }
+      .clause-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+      }
+      .clause-head .cat {
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .clause-head .conf {
+        color: var(--muted);
+        font-size: 11px;
+      }
+      .clause-text {
+        font-size: 12.5px;
+        color: var(--muted);
+        margin: 8px 0;
+        max-height: 90px;
+        overflow-y: auto;
+        line-height: 1.5;
+        white-space: pre-wrap;
+      }
+      .flags {
+        margin-top: 8px;
+      }
+      .flag {
+        font-size: 12px;
+        background: rgba(240, 85, 107, 0.08);
+        border: 1px solid rgba(240, 85, 107, 0.25);
+        border-radius: 6px;
+        padding: 6px 10px;
+        margin-top: 6px;
+      }
+      .flag b {
+        color: var(--high);
+      }
+      .meta {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 8px;
+      }
+      .breakdown-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        padding: 4px 0;
+      }
+      .empty {
+        color: var(--muted);
+        text-align: center;
+        padding: 60px 0;
+        font-size: 14px;
+      }
+      .err {
+        color: var(--high);
+        font-size: 13px;
+        margin-top: 8px;
+      }
+      h3 {
+        margin: 0 0 12px;
+        font-size: 14px;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>⚖️ Contract Risk Analyzer</h1>
+      <p>
+        Upload a contract → clauses are extracted, classified by type, and
+        scored against a corpus of standard/fair reference clauses plus
+        rule-based red flags.
+      </p>
+    </header>
+
+    <div class="layout">
+      <div class="left">
+        <div class="card">
+          <h3>Analyze a Contract</h3>
+          <div>
+            <button class="sample-btn" onclick="loadSample('risky')">
+              Load risky sample
+            </button>
+            <button class="sample-btn" onclick="loadSample('standard')">
+              Load standard sample
+            </button>
+          </div>
+          <textarea
+            id="textInput"
+            placeholder="Paste contract text here, or load a sample above..."
+          ></textarea>
+          <div>
+            <input type="file" id="fileInput" accept=".txt,.pdf,.docx" />
+          </div>
+          <button id="analyzeBtn" onclick="analyze()">Analyze Contract</button>
+          <div id="err" class="err"></div>
+        </div>
+
+        <div class="card" id="summaryCard" style="display: none">
+          <h3>Overall Risk</h3>
+          <div id="scoreRing" class="score-ring"></div>
+          <div
+            style="text-align: center; color: var(--muted); font-size: 12px"
+            id="clauseCount"
+          ></div>
+          <div style="margin-top: 14px" id="breakdown"></div>
+        </div>
+      </div>
+
+      <div class="right">
+        <div id="results">
+          <div class="empty">
+            Load a sample or upload a contract to see the analysis.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const API_BASE = "http://127.0.0.1:8000";
+
+      async function loadSample(kind) {
+        const path =
+          kind === "risky"
+            ? "../backend/sample_contracts/sample_contract_risky.txt"
+            : "../backend/sample_contracts/sample_contract_standard.txt";
+        try {
+          const res = await fetch(path);
+          document.getElementById("textInput").value = await res.text();
+        } catch (e) {
+          document.getElementById("err").textContent =
+            "Couldn't load sample file (open via a local server, not file://).";
+        }
+      }
+
+      function ringColor(level) {
+        return level === "High"
+          ? "var(--high)"
+          : level === "Medium"
+            ? "var(--medium)"
+            : "var(--low)";
+      }
+
+      async function analyze() {
+        const btn = document.getElementById("analyzeBtn");
+        const err = document.getElementById("err");
+        err.textContent = "";
+        btn.disabled = true;
+        btn.textContent = "Analyzing...";
+
+        const fileInput = document.getElementById("fileInput");
+        const textInput = document.getElementById("textInput").value.trim();
+
+        try {
+          let res;
+          if (fileInput.files.length > 0) {
+            const form = new FormData();
+            form.append("file", fileInput.files[0]);
+            res = await fetch(`${API_BASE}/analyze`, {
+              method: "POST",
+              body: form,
+            });
+          } else if (textInput) {
+            const form = new FormData();
+            form.append("payload", textInput);
+            res = await fetch(`${API_BASE}/analyze-text`, {
+              method: "POST",
+              body: form,
+            });
+          } else {
+            err.textContent =
+              "Paste some contract text, load a sample, or choose a file first.";
+            btn.disabled = false;
+            btn.textContent = "Analyze Contract";
+            return;
+          }
+
+          if (!res.ok) {
+            const detail = (await res.json()).detail || res.statusText;
+            throw new Error(detail);
+          }
+          const data = await res.json();
+          render(data);
+        } catch (e) {
+          err.textContent =
+            "Error: " +
+            e.message +
+            " (Is the backend running at " +
+            API_BASE +
+            "?)";
+        } finally {
+          btn.disabled = false;
+          btn.textContent = "Analyze Contract";
+        }
+      }
+
+      function render(data) {
+        document.getElementById("summaryCard").style.display = "block";
+        const ring = document.getElementById("scoreRing");
+        ring.style.borderColor = ringColor(data.overall_risk_level);
+        ring.innerHTML = `<div class="num" style="color:${ringColor(data.overall_risk_level)}">${data.overall_risk_score}</div><div class="lvl">${data.overall_risk_level} Risk</div>`;
+        document.getElementById("clauseCount").textContent =
+          `${data.clause_count} clauses analyzed`;
+
+        const breakdown = document.getElementById("breakdown");
+        breakdown.innerHTML = Object.entries(data.category_breakdown)
+          .map(
+            ([cat, n]) =>
+              `<div class="breakdown-row"><span>${cat}</span><span>${n}</span></div>`,
+          )
+          .join("");
+
+        const results = document.getElementById("results");
+        results.innerHTML = data.clauses
+          .map(
+            (c) => `
+    <div class="clause ${c.risk_level}">
+      <div class="clause-head">
+        <span class="cat">${c.category} <span class="badge ${c.risk_level}">${c.risk_level} · ${c.risk_score}</span></span>
+        <span class="conf">type confidence ${(c.category_confidence * 100).toFixed(0)}%</span>
+      </div>
+      <div class="clause-text">${escapeHtml(c.text)}</div>
+      ${c.flags.length ? `<div class="flags">${c.flags.map((f) => `<div class="flag"><b>⚑ "${f.phrase}"</b> (severity ${f.severity}/3) — ${f.explanation}</div>`).join("")}</div>` : ""}
+      <div class="meta">Template deviation: ${c.deviation_score}/100 &nbsp;·&nbsp; Closest standard-clause similarity: ${(c.similarity_to_closest * 100).toFixed(0)}%</div>
+    </div>
+  `,
+          )
+          .join("");
+      }
+
+      function escapeHtml(s) {
+        const d = document.createElement("div");
+        d.innerText = s;
+        return d.innerHTML;
+      }
+    </script>
+  </body>
+</html>
